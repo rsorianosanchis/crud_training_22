@@ -1,4 +1,3 @@
-import 'package:crud_training_22/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -21,7 +20,11 @@ class ProductCard extends StatelessWidget {
             Positioned(
               child: _PriceDetail(),
               top: 0,
-              right: 0,)
+              right: 0,),
+            Positioned(
+              child: _NotAvailable(),
+              top: 0,
+              left: 0,)
           ]
         ),
       ),
@@ -44,6 +47,35 @@ class ProductCard extends StatelessWidget {
   }
 }
 
+class _NotAvailable extends StatelessWidget {
+  const _NotAvailable({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding:const EdgeInsets.symmetric(horizontal: 20),
+      alignment: Alignment.center,
+      height: 70,
+      decoration: const BoxDecoration(
+        color: Colors.amber,
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(25),
+          topLeft: Radius.circular(25))
+      ),
+      child: const Text(
+        'Not available',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize:20,
+          fontWeight: FontWeight.bold
+        ),
+      ),
+    );
+  }
+}
+
 class _PriceDetail extends StatelessWidget {
   const _PriceDetail({
     Key? key,
@@ -52,18 +84,8 @@ class _PriceDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       padding:const EdgeInsets.symmetric(horizontal: 20),
       alignment: Alignment.center,
-      child: Text(
-        '200 \$',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize:20,
-          fontWeight: FontWeight.bold
-        ),
-        
-      ),
       height: 70,
       decoration: const BoxDecoration(
         color: Colors.indigo,
@@ -71,7 +93,14 @@ class _PriceDetail extends StatelessWidget {
           bottomLeft: Radius.circular(25),
           topRight: Radius.circular(25))
       ),
-
+      child: const Text(
+        '20000 \$',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize:20,
+          fontWeight: FontWeight.bold
+        ),
+      ),
     );
   }
 }
@@ -84,7 +113,7 @@ class _ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 70),
+      padding: const EdgeInsets.only(right: 70),
       child: Container(
         alignment: Alignment.center,
         width:double.infinity,
