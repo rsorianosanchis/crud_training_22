@@ -6,6 +6,8 @@ import 'package:crud_training_22/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
+
+  static const String routeName = 'login';
    
   const LoginScreen({Key? key}) : super(key: key);
   
@@ -108,7 +110,7 @@ class _LoginForm extends StatelessWidget {
             ),
             disabledColor: Colors.grey,
             elevation: 0,
-            color: Color.fromRGBO(90, 70, 178, 1),
+            color: const  Color.fromRGBO(90, 70, 178, 1),
 
             onPressed:loginFormProvider.isLoading?null: ()async{
               //TODO: login submit
@@ -120,7 +122,7 @@ class _LoginForm extends StatelessWidget {
               // ha sido validado ok
               loginFormProvider.isLoading = true;
               //temp
-              await Future.delayed(Duration(seconds: 2));
+              await Future.delayed(const Duration(seconds: 2));
               
               //TODO: validar si el backend acepta el login antes de ingresar a home
               Navigator.pushReplacementNamed(context,'home');
@@ -128,9 +130,9 @@ class _LoginForm extends StatelessWidget {
               // SI EL FORMULARIO ES VALIDO PODEMOS HACER YA PETICION HTTP O LO QUE SEA
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+              padding:const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
               child: Text(loginFormProvider.isLoading?'Wait...':'Submit',
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               )  
             ),
           )

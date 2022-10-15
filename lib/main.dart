@@ -15,8 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'CRUD TRAINING 2022',
       initialRoute: 'home',
       routes:{
-        'home':(BuildContext context) => const HomeScreen(),
-        'login':(BuildContext context) => const LoginScreen()
+        HomeScreen.routeName:(context) => const HomeScreen(),
+        LoginScreen.routeName:(context) => const LoginScreen(),
+        ProductEditScreen.routeName:(context) => const ProductEditScreen()
 
       } ,
       theme: CustomTheme.customTheme,

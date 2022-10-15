@@ -8,7 +8,7 @@ class ProductCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Container(
-        margin: EdgeInsets.only(top: 20,bottom: 40),
+        margin: const EdgeInsets.only(top: 20,bottom: 40),
         width: double.infinity,
         height: 400,
         decoration: _cardDecoration(),
@@ -18,13 +18,14 @@ class ProductCard extends StatelessWidget {
             _BackGroundImage(),
             _ProductDetails(),
             Positioned(
-              child: _PriceDetail(),
               top: 0,
-              right: 0,),
+              right: 0,
+              child: _PriceDetail(),),
+              //TODO: show depending avability
             Positioned(
-              child: _NotAvailable(),
               top: 0,
-              left: 0,)
+              left: 0,
+              child: _NotAvailable(),)
           ]
         ),
       ),
@@ -170,14 +171,12 @@ class _BackGroundImage extends StatelessWidget {
     
     return ClipRRect(
       borderRadius: BorderRadius.circular(25),
-      child: Container(
-        child: const FadeInImage(
-          height: double.infinity,
-          width: double.infinity,
-          placeholder: AssetImage('assets/jar-loading.gif'), 
-          image:  NetworkImage('https://via.placeholder.com/400x300/d6d6d6.jpg'),
-          fit: BoxFit.cover,
-        ),
+      child: const FadeInImage(
+        height: double.infinity,
+        width: double.infinity,
+        placeholder: AssetImage('assets/jar-loading.gif'), 
+        image:  NetworkImage('https://via.placeholder.com/400x300/d6d6d6.jpg'),
+        fit: BoxFit.cover,
       ),
     );
   }

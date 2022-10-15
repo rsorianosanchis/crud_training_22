@@ -10,23 +10,49 @@ class InputDecorations {
     IconData ?prefixIcon,
   }){
     return InputDecoration(
+      prefixIcon:  Icon(
+        prefixIcon,
+        color: Colors.indigo,
+      ),
       enabledBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
           width: 1,
-          color: Color.fromRGBO(90, 70, 178, 1), )
+          color: Colors.indigo, )
       ),
       focusedBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
           color: Colors.indigo,
-          width: 3
+          width: 2
         )
       ),
+      
       hintText: hintText,
       labelText: labelText,
-      prefixIcon:  Icon(
-        prefixIcon,
-        color: const Color.fromRGBO(90, 70, 178, 1),
-      )
+      
+      
+    );
+  }
+  static InputDecoration productInputDecoration ({
+    required String hintText,
+    required String labelText,
+  }){
+    return InputDecoration(
+      enabledBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(
+          width: 1,
+          color: Colors.indigo, )
+      ),
+      focusedBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.indigo,
+          width: 2
+        )
+      ),
+      
+      hintText: hintText,
+      labelText: labelText,
+      
+      
     );
   }
 }
