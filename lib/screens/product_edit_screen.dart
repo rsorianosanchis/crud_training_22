@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:crud_training_22/providers/product_provider.dart';
 import 'package:crud_training_22/ui/input_decorations.dart';
-import 'package:flutter/material.dart';
 import 'package:crud_training_22/widgets/widgets.dart';
-import 'package:provider/provider.dart';
 
 class ProductEditScreen extends StatelessWidget {
 
@@ -26,7 +26,7 @@ class ProductEditScreen extends StatelessWidget {
             ),
             ChangeNotifierProvider(
               create: ((context) => ProductProvider()),
-              child: _ProductForm()
+              child: const _ProductForm()
             )
           ],
 
@@ -35,7 +35,7 @@ class ProductEditScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         
         onPressed: (){},
-        child: Icon(Icons.save)),
+        child: const Icon(Icons.save)),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
@@ -77,6 +77,7 @@ class _ProductForm extends StatelessWidget {
             ),
             SizedBox(height: 20,),
             SwitchListTile.adaptive(
+              
               title: Text('Available'),
               activeColor: Colors.indigo,
               value: productProvider.isAvailable, 
