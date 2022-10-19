@@ -1,3 +1,5 @@
+import 'package:crud_training_22/models/product_model.dart';
+import 'package:crud_training_22/services/products_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:crud_training_22/providers/product_provider.dart';
@@ -12,6 +14,9 @@ class ProductEditScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+
+    final ProductModel product = ModalRoute.of(context)!.settings.arguments as ProductModel;
+
     return  Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
@@ -62,6 +67,7 @@ class _ProductForm extends StatelessWidget {
             SizedBox(height: 20,),
      
             TextFormField(
+
               decoration: InputDecorations.productInputDecoration(
                 hintText: 'Hint', 
                 labelText: 'Label'
@@ -71,7 +77,7 @@ class _ProductForm extends StatelessWidget {
             TextFormField(
               keyboardType: TextInputType.number,
               decoration: InputDecorations.productInputDecoration(
-                hintText: '150 \$', 
+                hintText: ' \$', 
                 labelText: 'Price'
               ),
             ),

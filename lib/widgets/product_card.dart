@@ -1,7 +1,11 @@
+import 'package:crud_training_22/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({Key? key}) : super(key: key);
+
+  final ProductModel product;
+
+  const ProductCard({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,18 +18,18 @@ class ProductCard extends StatelessWidget {
         decoration: _cardDecoration(),
         child: Stack(
           alignment: Alignment.bottomLeft,
-          children: const [
-            _BackGroundImage(),
-            _ProductDetails(),
+          children:  [
+            _BackGroundImage(product: product),
+            _ProductDetails(product:product),
             Positioned(
               top: 0,
               right: 0,
-              child: _PriceDetail(),),
-              //TODO: show depending avability
-            Positioned(
+              child: _PriceDetail(product: product),),
+             
+            if(!product.available)const Positioned(
               top: 0,
               left: 0,
-              child: _NotAvailable(),)
+              child:_NotAvailable(),)
           ]
         ),
       ),
@@ -55,6 +59,7 @@ class _NotAvailable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       padding:const EdgeInsets.symmetric(horizontal: 20),
       alignment: Alignment.center,
@@ -78,8 +83,9 @@ class _NotAvailable extends StatelessWidget {
 }
 
 class _PriceDetail extends StatelessWidget {
+  final ProductModel product;
   const _PriceDetail({
-    Key? key,
+    Key? key, required this.product,
   }) : super(key: key);
 
   @override
@@ -94,9 +100,9 @@ class _PriceDetail extends StatelessWidget {
           bottomLeft: Radius.circular(25),
           topRight: Radius.circular(25))
       ),
-      child: const Text(
-        '20000 \$',
-        style: TextStyle(
+      child: Text(
+        '${product.price} \$',
+        style: const TextStyle(
           color: Colors.white,
           fontSize:20,
           fontWeight: FontWeight.bold
@@ -107,8 +113,10 @@ class _PriceDetail extends StatelessWidget {
 }
 
 class _ProductDetails extends StatelessWidget {
+
+  final ProductModel product;
   const _ProductDetails({
-    Key? key,
+    Key? key, required this.product,
   }) : super(key: key);
 
   @override
@@ -132,10 +140,10 @@ class _ProductDetails extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children:  [
             Text(
-              'Hard Disk G',
-              style: TextStyle(
+              product.name,
+              style:const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -145,8 +153,8 @@ class _ProductDetails extends StatelessWidget {
             ),
             SizedBox(height: 5,),
             Text(
-              'Compatible with Windows Milenium and Monterey',
-              style: TextStyle(
+              'ref.: ${product.id}',
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.normal,
                 fontSize: 15,
@@ -162,8 +170,10 @@ class _ProductDetails extends StatelessWidget {
 }
 
 class _BackGroundImage extends StatelessWidget {
+
+  final ProductModel product;
   const _BackGroundImage({
-    Key? key,
+    Key? key, required this.product,
   }) : super(key: key);
 
   @override
@@ -171,11 +181,11 @@ class _BackGroundImage extends StatelessWidget {
     
     return ClipRRect(
       borderRadius: BorderRadius.circular(25),
-      child: const FadeInImage(
+      child:  FadeInImage(
         height: double.infinity,
         width: double.infinity,
-        placeholder: AssetImage('assets/jar-loading.gif'), 
-        image:  NetworkImage('https://via.placeholder.com/400x300/d6d6d6.jpg'),
+        placeholder: const AssetImage('assets/jar-loading.gif'), 
+        image:  NetworkImage((product.picture)??'https://via.placeholder.com/400x300/d6d6d6.jpg'),
         fit: BoxFit.cover,
       ),
     );

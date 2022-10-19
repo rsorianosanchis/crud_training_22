@@ -1,3 +1,5 @@
+import 'package:crud_training_22/models/product_model.dart';
+import 'package:crud_training_22/screens/screens.dart';
 import 'package:crud_training_22/services/products_service.dart';
 import 'package:crud_training_22/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -12,15 +14,19 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productsServices = Provider.of<ProductsService>(context);
+    final List<ProductModel> listProducts = productsServices.productList;
+
+    if(productsServices.isLoading) return const LoadingScreen();
+
     return  Scaffold(
       appBar: AppBar(
         title: const Text('Products'),
       ),
       body: ListView.builder(
-        itemCount: 10,
+        itemCount: productsServices.productList.length,
         itemBuilder: ((context, index) => GestureDetector(
-            child: const ProductCard(),
-            onTap: () => Navigator.pushNamed(context,'product'),
+            child: ProductCard(product: listProducts[index]),
+            onTap: () => Navigator.pushNamed(context,'product',arguments: listProducts[index]),
           )
         ),
       ),
