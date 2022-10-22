@@ -1,4 +1,3 @@
-import 'package:crud_training_22/models/product_model.dart';
 import 'package:crud_training_22/services/products_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,17 +14,18 @@ class ProductEditScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final ProductModel product = ModalRoute.of(context)!.settings.arguments as ProductModel;
-
+    //final ProductModel product = ModalRoute.of(context)!.settings.arguments as ProductModel;
+    final productsService = Provider.of<ProductsService>(context);
+    final product = productsService.selectedProduct;
     return  Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
         child: Column(
           children: [
             Stack(
-              children: const [
-                ProductImage(),
-                _ImageIcons(),
+              children:  [
+                ProductImage(imageUrl:product.picture ),
+                const _ImageIcons(),
 
               ],
             ),
@@ -130,9 +130,26 @@ class _ImageIcons extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
+          
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(icon:const Icon(Icons.arrow_back_ios),onPressed:()=>Navigator.of(context).pop() , iconSize: 40,color: Colors.white,),
+            Container(
+              //padding: Edge,
+              decoration: BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadius.circular(50)
+              ),
+              height: 50,
+              width: 50,
+              alignment:Alignment.center ,
+              child: IconButton(
+              icon:const Icon(Icons.arrow_back_ios),onPressed:()=>Navigator.of(context).pop() , 
+              iconSize: 40,color: Colors.white,
+            ),
+            
+
+            )
+            ,
             IconButton(icon:const Icon(Icons.photo_camera_outlined),onPressed:(){} , iconSize: 40,color: Colors.white,),                  
           ],
         ),

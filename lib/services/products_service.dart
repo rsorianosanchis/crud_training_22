@@ -7,6 +7,10 @@ class ProductsService extends ChangeNotifier {
   final String _urlBase = 'flutter-training-8f59b-default-rtdb.europe-west1.firebasedatabase.app';
   //final String _urlBase = 'https://flutter-training-8f59b-default-rtdb.europe-west1.firebasedatabase.app/products.json';
   final List<ProductModel> productList = [];
+  // este es el product que usamos para pasar datos cuando clikamos sobre la lista uno en concreto. Por cambiar
+  // de metodo y no usar los arguments de navoigator
+  late ProductModel selectedProduct;
+
   bool isLoading = true;
 
   ProductsService(){

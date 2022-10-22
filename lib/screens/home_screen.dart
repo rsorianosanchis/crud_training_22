@@ -26,7 +26,11 @@ class HomeScreen extends StatelessWidget {
         itemCount: productsServices.productList.length,
         itemBuilder: ((context, index) => GestureDetector(
             child: ProductCard(product: listProducts[index]),
-            onTap: () => Navigator.pushNamed(context,'product',arguments: listProducts[index]),
+            //onTap: () => Navigator.pushNamed(context,'product',arguments: listProducts[index]),
+            onTap: () {
+              productsServices.selectedProduct=listProducts[index].copyProduct();//rompemos la referencia al ahcer una copia. Asi no cargaremos en la pantalla de detail el que esta refrenciado en la Lista sino uno nuevo que es igual
+              Navigator.pushNamed(context,'product');
+            },
           )
         ),
       ),

@@ -124,11 +124,10 @@ class _ProductDetails extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(right: 70),
       child: Container(
-        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        //alignment: Alignment.centerLeft,
         width:double.infinity,
         height: 70,
-        
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         decoration: const BoxDecoration(
           color: Colors.indigo,
           borderRadius: BorderRadius.only(
@@ -181,12 +180,23 @@ class _BackGroundImage extends StatelessWidget {
     
     return ClipRRect(
       borderRadius: BorderRadius.circular(25),
-      child:  FadeInImage(
-        height: double.infinity,
+      child: SizedBox(
+        height: double.infinity ,
         width: double.infinity,
-        placeholder: const AssetImage('assets/jar-loading.gif'), 
-        image:  NetworkImage((product.picture)??'https://via.placeholder.com/400x300/d6d6d6.jpg'),
-        fit: BoxFit.cover,
+        child: product.picture== null 
+        ? const Image(
+          // height: double.infinity ,
+          // width: double.infinity,
+          image: AssetImage('assets/no-image.png'),
+          fit: BoxFit.cover,
+        )
+        :FadeInImage(
+          // height: double.infinity,
+          // width: double.infinity,
+          placeholder: const AssetImage('assets/jar-loading.gif'), 
+          image: NetworkImage(product.picture!),
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
