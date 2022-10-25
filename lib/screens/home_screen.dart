@@ -28,6 +28,8 @@ class HomeScreen extends StatelessWidget {
             child: ProductCard(product: listProducts[index]),
             //onTap: () => Navigator.pushNamed(context,'product',arguments: listProducts[index]),
             onTap: () {
+              //cargamos al selectedproduct del provider una copia para romper la referencia y no se modifique el original.
+              // y luego ya usaremops el selected en la pagina que nos interese a traves del provider
               productsServices.selectedProduct=listProducts[index].copyProduct();//rompemos la referencia al ahcer una copia. Asi no cargaremos en la pantalla de detail el que esta refrenciado en la Lista sino uno nuevo que es igual
               Navigator.pushNamed(context,'product');
             },

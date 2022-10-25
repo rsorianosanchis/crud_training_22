@@ -58,7 +58,7 @@ class _LoginForm extends StatelessWidget {
       key: loginFormProvider.formKey,
       // con el key controlamos todas las validaciones al presionar boton de aceptar.
       // con los validators internos de cada field junto con el autovalidateMode, lo que hacemos es validar mientrasingresamos valores en los campos
-      // con el del key lanzamos valicaiones por ejemplo cuando damos sin querer a aceptar sin haber escrito nada o solo parcoialmenete
+      // con el del key lanzamos valicaiones por ejemplo cuando damos sin querer a aceptar sin haber escrito nada o solo parcialmenete
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [

@@ -39,7 +39,7 @@ class ProductModel {
         "picture": picture,
         "price": price,
     };
-    // metodo para crear copia del producto al que s ele aplica el metodo
+    // metodo para crear copia del producto al que se le aplica el metodo
     ProductModel copyProduct() => ProductModel(
       available: available,
       name: name,
