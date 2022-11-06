@@ -1,8 +1,8 @@
-import 'package:crud_training_22/models/product_model.dart';
-import 'package:crud_training_22/screens/screens.dart';
-import 'package:crud_training_22/services/products_service.dart';
-import 'package:crud_training_22/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:crud_training_22/models/models.dart';
+import 'package:crud_training_22/screens/screens.dart';
+import 'package:crud_training_22/services/services.dart';
+import 'package:crud_training_22/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -37,7 +37,11 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+
+          productsServices.selectedProduct = ProductModel(available: false, name: '', price: 0);
+          Navigator.pushNamed(context, 'product');
+        },
         child: const Icon(Icons.add),
       ),
     );
