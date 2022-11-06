@@ -77,8 +77,11 @@ class _screenScaffold extends StatelessWidget {
         },
         child:(productsService.isSaving)
           ? const CircularProgressIndicator(color: Colors.white,)
-          :const Icon(Icons.save)),
+          :const Icon(Icons.save)
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      
+      
     );
   }
 }
@@ -91,6 +94,7 @@ class _ProductForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final productsService = Provider.of<ProductsService>(context);
     final productFormProvider = Provider.of<ProductFormProvider>(context);
     final selectedProduct = productFormProvider.selectedProduct;
 
@@ -103,8 +107,22 @@ class _ProductForm extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child:Column(
           //crossAxisAlignment: CrossAxisAlignment.start,
+
           children: [
             SizedBox(height: 20,),
+            Row(
+              
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: ()async{
+                    await productsService.deleteProduct(selectedProduct);
+                    Navigator.pushNamed(context, 'home');
+                  }, 
+                  child: const Icon(Icons.delete_forever,color: Colors.red,size: 38), 
+                ),
+              ],
+            ),
      
             TextFormField(
               initialValue: selectedProduct.name ,

@@ -98,6 +98,19 @@ class ProductsService extends ChangeNotifier {
     productList[indexOfModifiedProduct]=product;
     return product.id!;
   }
+  Future  deleteProduct (ProductModel product )async{
+    //https://flutter-training-8f59b-default-rtdb.europe-west1.firebasedatabase.app/products/ABC123
+    final url = Uri.https(_urlBase,'products/${product.id}.json');
+    final response = await http.delete(url,body: product.toJson() );
+    final decodedData = response.body;
+
+    print('response delete : $decodedData');
+    //ProductModel temp = productList.contains(product.i);
+    // 
+    final int indexOfModifiedProduct = productList.indexWhere((element)=>element.id == product.id);
+    productList.removeAt(indexOfModifiedProduct);
+    notifyListeners();
+  }
 
   void updateSelectedProductImage (String imagePath){
     selectedProduct.picture = imagePath; // aqui en vez de url le damos path the hardware pero haremos el filtro mas adelante
