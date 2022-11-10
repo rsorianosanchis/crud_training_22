@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:crud_training_22/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
 
-  static const String routeName = 'login';
+  static const String routeName = 'register';
    
-  const LoginScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 10,),
-                    Text('Login',style: Theme.of(context).textTheme.headline4),
+                    Text('Register',style: Theme.of(context).textTheme.headline4),
                     ChangeNotifierProvider(
                       create: (context) => LoginFormProvider(),
                       child: const _LoginForm()
@@ -35,11 +35,9 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 50,),
               TextButton(
-
-                onPressed: ()=>Navigator.pushReplacementNamed(context, 'register'), 
-                child:  Text('Register new account',style:Theme.of(context).textTheme.headline6),
-                style: CustomTheme.customButtonLoginReg
-              ),
+                onPressed: ()=>Navigator.pushReplacementNamed(context, 'login'), 
+                child:  Text('Have an account already?',style: Theme.of(context).textTheme.headline6,),
+                style: CustomTheme.customButtonLoginReg),
               const SizedBox(height: 80,),
             ],
           ),

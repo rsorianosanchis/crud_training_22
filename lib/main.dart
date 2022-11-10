@@ -30,11 +30,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'CRUD TRAINING 2022',
-      initialRoute: 'home',
+      initialRoute: 'login',
       routes:{
         HomeScreen.routeName:(context) => const HomeScreen(),
         LoginScreen.routeName:(context) => const LoginScreen(),
-        ProductEditScreen.routeName:(context) => const ProductEditScreen()
+        ProductEditScreen.routeName:(context) => const ProductEditScreen(),
+        RegisterScreen.routeName:(context) => const RegisterScreen(),
 
       } ,
       theme: CustomTheme.customTheme,
