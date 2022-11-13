@@ -25,7 +25,7 @@ class LoginFormProvider extends ChangeNotifier {
   bool isValidForm (){
 
     print('$email - $password');
-    // cuando llalmos a este metodo, preguntamos al key, si su widget(formulario) es valido o no.
+    // cuando llamamos a este metodo, preguntamos al key, si su widget(formulario) es valido o no.
     print(formKey.currentState?.validate() ?? false);
     return formKey.currentState?.validate() ?? false;
   }

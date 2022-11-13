@@ -126,7 +126,7 @@ class ProductsService extends ChangeNotifier {
     isSaving = true;
     notifyListeners();
 
-    final url = Uri.parse('https://api.cloudinary.com/v1_1/drwfcuh5z/image/upload?upload_preset=mhldsmzd');
+    final url = Uri.parse('https://api.cloudinary.com/v1_1/drwf46cuh5z/image/upload?upload_preset=mhldsmzd');
 
     final imageUploadRequest = http.MultipartRequest('POST',url); // este es el request preparado
 

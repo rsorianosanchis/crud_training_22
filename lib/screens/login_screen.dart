@@ -37,8 +37,8 @@ class LoginScreen extends StatelessWidget {
               TextButton(
 
                 onPressed: ()=>Navigator.pushReplacementNamed(context, 'register'), 
-                child:  Text('Register new account',style:Theme.of(context).textTheme.headline6),
-                style: CustomTheme.customButtonLoginReg
+                style: CustomTheme.customButtonLoginReg,
+                child: const Text('Register new account',style: TextStyle(color: Colors.black45,fontSize: 18)),
               ),
               const SizedBox(height: 80,),
             ],
@@ -118,19 +118,22 @@ class _LoginForm extends StatelessWidget {
             elevation: 0,
             color: const  Color.fromRGBO(90, 70, 178, 1),
 
-            onPressed:loginFormProvider.isLoading?null: ()async{
+            onPressed:loginFormProvider.isLoading
+              ? null // 
+              : ()async{
               //TODO: login submit
               //quitamos el teclado para que no moleste al pulsar el boton
               FocusScope.of(context).unfocus();
              
               if(!loginFormProvider.isValidForm())return;
               //
-              // ha sido validado ok
+              // ha sido validado ok, acto seguido ponemos a true el setter isLoading y el botón entonces se deshabilitara
               loginFormProvider.isLoading = true;
               //temp
               await Future.delayed(const Duration(seconds: 2));
               
               //TODO: validar si el backend acepta el login antes de ingresar a home
+
               Navigator.pushReplacementNamed(context,'home');
 
               // SI EL FORMULARIO ES VALIDO PODEMOS HACER YA PETICION HTTP O LO QUE SEA

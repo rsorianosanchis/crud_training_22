@@ -36,8 +36,12 @@ class RegisterScreen extends StatelessWidget {
               const SizedBox(height: 50,),
               TextButton(
                 onPressed: ()=>Navigator.pushReplacementNamed(context, 'login'), 
-                child:  Text('Have an account already?',style: Theme.of(context).textTheme.headline6,),
-                style: CustomTheme.customButtonLoginReg),
+                style: CustomTheme.customButtonLoginReg,
+                child: const Text(
+                  'Have an account already?',
+                  style: TextStyle(color: Colors.black45,fontSize: 18),
+                ),
+              ),
               const SizedBox(height: 80,),
             ],
           ),
@@ -86,7 +90,7 @@ class _LoginForm extends StatelessWidget {
               return regExp.hasMatch(value ??'')
                 ? null
                 : 'Email format not valid'; 
-            } ,     // si regresa un string (en este caso 'hola') se imprime debajo, si regresa null significa que paso la validacion  
+            } ,     // si regresa un string (en este caso 'hola') se imprime debajo, si regresa null significa que pasó la validacion  
           ),
           const SizedBox(height: 30,),
           TextFormField(
@@ -116,7 +120,7 @@ class _LoginForm extends StatelessWidget {
             elevation: 0,
             color: const  Color.fromRGBO(90, 70, 178, 1),
 
-            onPressed:loginFormProvider.isLoading?null: ()async{
+            onPressed: loginFormProvider.isLoading ?null: ()async{
               //TODO: login submit
               //quitamos el teclado para que no moleste al pulsar el boton
               FocusScope.of(context).unfocus();
