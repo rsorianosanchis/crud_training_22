@@ -14,6 +14,7 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ProductsService()),
+        ChangeNotifierProvider(create: (context) => AuthService()),
       ],
       child: const MyApp()
     );
@@ -30,17 +31,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'CRUD TRAINING 2022',
-      initialRoute: 'login',
+      initialRoute: 'checking',
       routes:{
         HomeScreen.routeName:(context) => const HomeScreen(),
         LoginScreen.routeName:(context) => const LoginScreen(),
         ProductEditScreen.routeName:(context) => const ProductEditScreen(),
         RegisterScreen.routeName:(context) => const RegisterScreen(),
-
+        CheckAuthScreen.routeName:(context) => const CheckAuthScreen()
       } ,
       theme: CustomTheme.customTheme,
-
-      
     );
   }
 }

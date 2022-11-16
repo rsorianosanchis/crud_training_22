@@ -1,5 +1,6 @@
 
 import 'package:crud_training_22/providers/login_form_provider.dart';
+import 'package:crud_training_22/services/services.dart';
 import 'package:crud_training_22/theme/custom_theme.dart';
 import 'package:crud_training_22/ui/input_decorations.dart';
 import 'package:flutter/material.dart';
@@ -121,22 +122,27 @@ class _LoginForm extends StatelessWidget {
             onPressed:loginFormProvider.isLoading
               ? null // 
               : ()async{
+                
+              final authService = Provider.of<AuthService>(context, listen: false);// dentro de los metodos siempre en false
               //TODO: login submit
               //quitamos el teclado para que no moleste al pulsar el boton
               FocusScope.of(context).unfocus();
-             
               if(!loginFormProvider.isValidForm())return;
               //
-              // ha sido validado ok, acto seguido ponemos a true el setter isLoading y el botón entonces se deshabilitara
+              // ha sido validado ok
               loginFormProvider.isLoading = true;
-              //temp
-              await Future.delayed(const Duration(seconds: 2));
-              
-              //TODO: validar si el backend acepta el login antes de ingresar a home
 
-              Navigator.pushReplacementNamed(context,'home');
+              final String? errorMessage = await authService.loginUserRequest(loginFormProvider.email, loginFormProvider.password);
+              if(errorMessage == null ){
+                loginFormProvider.isLoading = false;
+                Navigator.pushReplacementNamed(context,'home');
+              }else{
+                //TODO: mostrar error en pantalla
+                print(errorMessage);
+                loginFormProvider.isLoading = false;
+                //Navigator.pushReplacementNamed(context,'login');
+              }
 
-              // SI EL FORMULARIO ES VALIDO PODEMOS HACER YA PETICION HTTP O LO QUE SEA
             },
             child: Container(
               padding:const EdgeInsets.symmetric(horizontal: 30,vertical: 10),

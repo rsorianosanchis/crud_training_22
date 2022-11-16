@@ -1,10 +1,11 @@
 
+import 'package:crud_training_22/services/services.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:crud_training_22/providers/login_form_provider.dart';
 import 'package:crud_training_22/theme/custom_theme.dart';
 import 'package:crud_training_22/ui/input_decorations.dart';
-import 'package:flutter/material.dart';
 import 'package:crud_training_22/widgets/widgets.dart';
-import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
 
@@ -26,9 +27,23 @@ class RegisterScreen extends StatelessWidget {
                     const SizedBox(height: 10,),
                     Text('Register',style: Theme.of(context).textTheme.headline4),
                     ChangeNotifierProvider(
-                      create: (context) => LoginFormProvider(),
-                      child: const _LoginForm()
+                      create: (_) => LoginFormProvider(),
+                      child:  const _LoginForm(),
+                    
                     ),
+
+                    // MultiProvider(
+                    //   providers: [
+                    //     ChangeNotifierProvider(create: (_) => LoginFormProvider()),
+                    //     ChangeNotifierProvider(create: (_) => AuthService()),                   
+                    //   ],
+                    //   child: const _LoginForm(),
+
+                    // )
+                    // ChangeNotifierProvider(
+                    //   create: (context) => LoginFormProvider(),
+                    //   child: const _LoginForm()
+                    // ),
               
                   ],
                 ) 
@@ -60,6 +75,7 @@ class _LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final loginFormProvider = Provider.of<LoginFormProvider>(context);
+    
 
     return Form(
       //TODO: mantener refrencia al key
@@ -119,23 +135,30 @@ class _LoginForm extends StatelessWidget {
             disabledColor: Colors.grey,
             elevation: 0,
             color: const  Color.fromRGBO(90, 70, 178, 1),
-
-            onPressed: loginFormProvider.isLoading ?null: ()async{
+            onPressed: loginFormProvider.isLoading 
+              ?null
+              : ()async{
+              final authService = Provider.of<AuthService>(context, listen: false);// dentro de los metodos siempre en false
               //TODO: login submit
               //quitamos el teclado para que no moleste al pulsar el boton
               FocusScope.of(context).unfocus();
-             
               if(!loginFormProvider.isValidForm())return;
               //
               // ha sido validado ok
               loginFormProvider.isLoading = true;
               //temp
-              await Future.delayed(const Duration(seconds: 2));
-              
-              //TODO: validar si el backend acepta el login antes de ingresar a home
-              Navigator.pushReplacementNamed(context,'home');
-
-              // SI EL FORMULARIO ES VALIDO PODEMOS HACER YA PETICION HTTP O LO QUE SEA
+              //await Future.delayed(const Duration(seconds: 2));
+              //TODO: validar si el backend acepta el login antes de ingresar a home SI EL FORMULARIO ES VALIDO PODEMOS HACER YA PETICION HTTP O LO QUE SEA
+              final String? errorMessage = await authService.createUserRequest(loginFormProvider.email, loginFormProvider.password);
+              if(errorMessage == null ){
+                loginFormProvider.isLoading = false;
+                Navigator.pushReplacementNamed(context,'login');
+              }else{
+                //TODO: mostrar error en pantalla
+                print(errorMessage);
+                loginFormProvider.isLoading = false;
+                Navigator.pushReplacementNamed(context,'register');
+              }
             },
             child: Container(
               padding:const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
