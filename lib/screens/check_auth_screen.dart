@@ -1,5 +1,6 @@
 import 'package:crud_training_22/screens/screens.dart';
 import 'package:crud_training_22/services/auth_service.dart';
+import 'package:crud_training_22/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -16,7 +17,7 @@ class CheckAuthScreen extends StatelessWidget {
     return FutureBuilder(
       future: authService.readToken(),
       builder: ((context, snapshot) {
-        if(!snapshot.hasData)return const Center(child:Text('Wait...'));
+        if(!snapshot.hasData)return Text('');
 
         if(snapshot.data == ''){
           Future.microtask((){

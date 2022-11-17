@@ -16,6 +16,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      
+      
       body: AuthBackground(
         child: SingleChildScrollView(
           child: Column(
@@ -138,7 +140,8 @@ class _LoginForm extends StatelessWidget {
                 Navigator.pushReplacementNamed(context,'home');
               }else{
                 //TODO: mostrar error en pantalla
-                print(errorMessage);
+                print('ERROR MSG: $errorMessage');
+                NotificationsService.showSnackBar (errorMessage);
                 loginFormProvider.isLoading = false;
                 //Navigator.pushReplacementNamed(context,'login');
               }

@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:crud_training_22/screens/screens.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(const AppState());
+void main(){
+  WidgetsFlutterBinding.ensureInitialized();
+  return runApp(const AppState());
+}
 
 class AppState extends StatelessWidget {
   const AppState({super.key});
@@ -29,6 +32,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey:NotificationsService.messengerKey,
+      //key: NotificationsService.messengerKey, // desde cualquier sitio afectaré a este scaffold si uso los metodos del Notificationservice, gracias , a estar vinculado esta clase con el MaterialApp a través del key
       debugShowCheckedModeBanner: false,
       title: 'CRUD TRAINING 2022',
       initialRoute: 'checking',

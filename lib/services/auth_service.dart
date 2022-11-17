@@ -14,7 +14,8 @@ class AuthService extends ChangeNotifier {
 
     final Map<String,dynamic> authRegisterBodyData = {
       'email':email,
-      'password':password
+      'password':password,
+      'returnSecureToken':true
     };
 
     final url = Uri.https(_baseUrl,'v1/accounts:signUp',{'key':_firebaseToken});
@@ -40,7 +41,8 @@ class AuthService extends ChangeNotifier {
     final url = Uri.https(_baseUrl,'v1/accounts:signInWithPassword',{'key':_firebaseToken});
     final Map<String,dynamic> authLoginBodyData = {
       'email':email,
-      'password':password
+      'password':password,
+      'returnSecureToken':true
     };
     final response = await http.post(url,body: jsonEncode(authLoginBodyData));
     final Map<String,dynamic> decodedResponse = jsonDecode(response.body);

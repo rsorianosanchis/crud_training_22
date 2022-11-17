@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:crud_training_22/models/product_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class ProductsService extends ChangeNotifier {
@@ -13,6 +14,8 @@ class ProductsService extends ChangeNotifier {
   // este es el product que usamos para pasar datos cuando clikamos sobre la lista uno en concreto. Por cambiar
   // de metodo y no usar los arguments de navoigator
   late ProductModel selectedProduct;
+  //
+  final storage = const FlutterSecureStorage();
 
   File? newPictureFile; // import 'dart:io';
 
@@ -28,7 +31,7 @@ class ProductsService extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    final url = Uri.https(_urlBase,'products.json');
+    final url = Uri.https(_urlBase,'products.json',{'auth': await storage.read(key: 'usrToken') ?? ''});
     var response = await http.get(url);
     if (response.statusCode == 200) {
 
@@ -73,7 +76,7 @@ class ProductsService extends ChangeNotifier {
 
   Future<String> createProduct (ProductModel product )async{
     //https://flutter-training-8f59b-default-rtdb.europe-west1.firebasedatabase.app/products/ABC123
-    final url = Uri.https(_urlBase,'products.json');
+    final url = Uri.https(_urlBase,'products.json',{'auth': await storage.read(key: 'usrToken') ?? ''});
     final response = await http.post(url,body: product.toJson() );
     final decodedData = response.body;
 
@@ -87,7 +90,7 @@ class ProductsService extends ChangeNotifier {
 
   Future<String> updateProduct (ProductModel product )async{
     //https://flutter-training-8f59b-default-rtdb.europe-west1.firebasedatabase.app/products/ABC123
-    final url = Uri.https(_urlBase,'products/${product.id}.json');
+    final url = Uri.https(_urlBase,'products/${product.id}.json',{'auth': await storage.read(key: 'usrToken') ?? ''});
     final response = await http.put(url,body: product.toJson() );
     final decodedData = response.body;
 
@@ -100,7 +103,7 @@ class ProductsService extends ChangeNotifier {
   }
   Future  deleteProduct (ProductModel product )async{
     //https://flutter-training-8f59b-default-rtdb.europe-west1.firebasedatabase.app/products/ABC123
-    final url = Uri.https(_urlBase,'products/${product.id}.json');
+    final url = Uri.https(_urlBase,'products/${product.id}.json',{'auth': await storage.read(key: 'usrToken') ?? ''});
     final response = await http.delete(url,body: product.toJson() );
     final decodedData = response.body;
 

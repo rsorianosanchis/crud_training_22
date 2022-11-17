@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:crud_training_22/models/models.dart';
 import 'package:crud_training_22/screens/screens.dart';
@@ -15,12 +17,24 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsServices = Provider.of<ProductsService>(context);
     final List<ProductModel> listProducts = productsServices.productList;
+    final authService = Provider.of<AuthService>(context, listen: false);// no necesito estar escuchandolo porque solo uso este provaider para acceder a un metodo cuando me interresa
 
     if(productsServices.isLoading) return const LoadingScreen();
 
     return  Scaffold(
       appBar: AppBar(
         title: const Text('Products'),
+        actions: [
+          
+          IconButton(
+            onPressed: (){
+              authService.logOut();
+              //exit(0);
+              Navigator.pushReplacementNamed(context, 'login');
+            }, 
+            icon:const Icon(Icons.exit_to_app)
+          )
+        ],
       ),
       body: ListView.builder(
         itemCount: productsServices.productList.length,
