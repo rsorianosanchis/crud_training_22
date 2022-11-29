@@ -36,7 +36,7 @@ class ProductsService extends ChangeNotifier {
     if (response.statusCode == 200) {
 
       final Map<String,dynamic> dataMapResp = jsonDecode(response.body);
-      // En este caso la String del map es el ID (ABC123) de cada producto del mapa que contierne com valor el producto en si
+      // En este caso la String del map es el ID (ABC123) de cada producto del mapa que contiene como valor el producto en si mismo
       dataMapResp.forEach((key, value) {
         final tempProduct = ProductModel.fromMap(value);// aqui cargamos en tempProduct el contenido de ABC123 etc
         tempProduct.id = key;// creamos y añadimos un id aprovechando la key de cada producto ex. ABC123

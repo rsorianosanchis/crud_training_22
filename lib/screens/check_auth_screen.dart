@@ -2,8 +2,6 @@ import 'package:crud_training_22/screens/screens.dart';
 import 'package:crud_training_22/services/auth_service.dart';
 import 'package:crud_training_22/services/services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 class CheckAuthScreen extends StatelessWidget {
@@ -15,15 +13,18 @@ class CheckAuthScreen extends StatelessWidget {
     final authService = Provider.of<AuthService>(context, listen: false);
 
     return FutureBuilder(
+
       future: authService.readToken(),
+
       builder: ((context, snapshot) {
-        if(!snapshot.hasData)return Text('');
+        print('control token : hh${snapshot.data}');
+        if(!snapshot.hasData)return Text('NO TOKEN');
 
         if(snapshot.data == ''){
           Future.microtask((){
               //Navigator.pushReplacementNamed(context, 'home');
               // Con este Navigator evitamos el salto de transicion. Secrea una navegacion instantanea
-              Navigator.pushReplacement(
+             return Navigator.pushReplacement(
                 context, 
                 PageRouteBuilder(
                   pageBuilder: ((_, __, ___) => const LoginScreen()),
@@ -33,10 +34,10 @@ class CheckAuthScreen extends StatelessWidget {
             }
           );  
         }else{
-              Future.microtask((){
+            Future.microtask((){
               //Navigator.pushReplacementNamed(context, 'home');
               // Con este Navigator evitamos el salto de transicion. Secrea una navegacion instantanea
-              Navigator.pushReplacement(
+              return Navigator.pushReplacement(
                 context, 
                 PageRouteBuilder(
                   pageBuilder: ((_, __, ___) => const HomeScreen()),
@@ -49,7 +50,7 @@ class CheckAuthScreen extends StatelessWidget {
         }
         
   
-        return Container();
+        return const CircularProgressIndicator.adaptive();
         
       }));
   }

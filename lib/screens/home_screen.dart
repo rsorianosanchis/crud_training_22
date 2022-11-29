@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:crud_training_22/models/models.dart';
 import 'package:crud_training_22/screens/screens.dart';
